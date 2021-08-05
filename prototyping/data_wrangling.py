@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 
+
 class Data_Wrangling():
     """
     Class to represent methods to clean and transform data.
@@ -17,8 +18,9 @@ class Data_Wrangling():
         Returns data downloaded from a HTTP request to OpenDataSUS API.
 
     flag_outliers_in_col(df, col='paciente_idade', threshold=2):
-        Flag which documents are outliers based on z-score bigger than threshold.
-    
+        Flag which documents are outliers
+        based on z-score bigger than threshold.
+
     filter_outliers(self, df, outlier):
         Filter outliers based on flag pd.Series.
     """
@@ -28,23 +30,24 @@ class Data_Wrangling():
 
     def flag_outliers_in_col(self, df, col='paciente_idade', threshold=2):
         """
-        Flag which documents are outliers based on z-score bigger than threshold.
+        Flag which documents are outliers
+        based on z-score bigger than threshold.
 
             Parameters:
             ----------
                 df : pd.DataFrame
                     OpenDataSUS DataFrame
-                
+
                 col : str
                     target column to be used in z-score and outlier computation
-                
+
                 threshold : int
                     threshold to consider a document an outlier
-            
+
             Returns:
             ----------
                 pd.Series
-                    True/False pd.Series, true being an outlier 
+                    True/False pd.Series, true being an outlier
         """
         data = df[col]
         mean = np.mean(data)
@@ -65,10 +68,10 @@ class Data_Wrangling():
             ----------
                 df : pd.DataFrame
                     OpenDataSUS DataFrame
-                
+
                 outlier : pd.Series
                     True/False pd.Series, true being an outlier
-            
+
             Returns:
             ----------
                 pd.DataFrame
