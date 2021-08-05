@@ -23,7 +23,7 @@ class Data_Wrangling():
         Filter outliers based on flag pd.Series.
     """
 
-    def __init__():
+    def __init__(self):
         pass
 
     def flag_outliers_in_col(self, df, col='paciente_idade', threshold=2):

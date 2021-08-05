@@ -1,10 +1,20 @@
-import pandas as pd
-import requests
+from contextlib import closing
 
-class data_download():
+import pandas as pd
+
+# import requests
+# import urllib.request
+# import zipfile
+import io
+import requests
+import zipfile
+# import StringIO
+
+
+class Data_Ingestion():
     """A class to represent data downloaded from OpenDAtaSUS API"""
 
-    def __init__():
+    def __init__(self):
         pass
 
     def download_vaccinated_people_info(self, n=10000):
@@ -40,5 +50,13 @@ class data_download():
         print(f"Gathered {len(data)} records.")
         return pd.DataFrame.from_records(data)
     
-    def download_establishment_data(self):
-        "https://sage.saude.gov.br/dados/repositorio/cadastro_estabelecimentos_cnes.zip"
+    def download_establishment_data_zip(self, url:str, save_path: str, chunk_size=128) -> None:
+        # def download_url(url, save_path, chunk_size=128):
+        r = requests.get(url, stream=True)
+        with open(save_path, 'wb') as fd:
+            for chunk in r.iter_content(chunk_size=chunk_size):
+                fd.write(chunk)
+    
+    def unzip_establishment_data(self, path_to_zip_file: str, directory_to_extract_to: str) -> None:
+        with zipfile.ZipFile(path_to_zip_file, 'r') as zip_ref:
+            zip_ref.extractall(directory_to_extract_to)
